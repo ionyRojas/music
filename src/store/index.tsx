@@ -1,49 +1,49 @@
-import { Dispatch } from "react";
+import { Dispatch } from 'react';
 
 type SelectedPlanType = Readonly<{
-  name: string,
-  price: number
-}>
+  name: string;
+  price: number;
+}>;
 
 type UserInfoType = Readonly<{
-  address: string,
-  city: string,
-  firstName: string,
-  lastName: string,
-  outsideUs: boolean,
-}>
+  address: string;
+  city: string;
+  firstName: string;
+  lastName: string;
+  outsideUs: boolean;
+}>;
 
 type InitialState = Readonly<{
   creditCard: {
-    cardNumber: string,
-    nameOnCard: string,
-    expiredDate: string,
-    cardType: string,
-  },
-  selectedPlan: SelectedPlanType,
-  userInfo: UserInfoType,
-}>
+    cardNumber: string;
+    nameOnCard: string;
+    expiredDate: string;
+    cardType: string;
+  };
+  selectedPlan: SelectedPlanType;
+  userInfo: UserInfoType;
+}>;
 
-type ActionsType = (dispatch: Dispatch<any>) => Readonly <{
-  addUserInfo: (type: UserInfoType) => void,
-  cardNumber: (card: string) => void,
-  cardType: (type: string) => void,
-  expiredDate: (date: string) => void,
-  nameOnCard: (name: string) => void,
-  resetCreditCard: () => void,
+type ActionsType = (dispatch: Dispatch<any>) => Readonly<{
+  addUserInfo: (type: UserInfoType) => void;
+  cardNumber: (card: string) => void;
+  cardType: (type: string) => void;
+  expiredDate: (date: string) => void;
+  nameOnCard: (name: string) => void;
+  resetCreditCard: () => void;
   selectedPlan: (selectedPlan: SelectedPlanType) => void;
-}>
+}>;
 
 export const initialState: InitialState = {
   creditCard: {
     cardNumber: '',
     nameOnCard: '',
     expiredDate: '',
-    cardType: "",
+    cardType: '',
   },
   selectedPlan: {
     name: '',
-    price: -1
+    price: -1,
   },
   userInfo: {
     address: '',
@@ -51,7 +51,7 @@ export const initialState: InitialState = {
     firstName: '',
     lastName: '',
     outsideUs: false,
-  }
+  },
 };
 
 const ADD_USER = 'ADD_USER';
@@ -67,40 +67,47 @@ const SELECTED_PLAN = 'SELECTED_PLAN';
  * @param  {Object} state
  * @param  {function} action
  */
-export function appReducer(state: InitialState, action: {type: string, payload?: string}) {
+export function appReducer(
+  state: InitialState,
+  action: { type: string; payload?: string },
+) {
   const { type, payload = '' } = action;
 
   switch (type) {
     case SELECTED_PLAN:
-      return {...state, selectedPlan: payload}
+      return { ...state, selectedPlan: payload };
     case CARD_NUMBER:
       return {
         ...state,
         creditCard: {
           ...state.creditCard,
-          cardNumber: payload
-        }}
+          cardNumber: payload,
+        },
+      };
     case NAME_ON_CARD:
       return {
         ...state,
         creditCard: {
           ...state.creditCard,
-          nameOnCard: payload
-        }}
+          nameOnCard: payload,
+        },
+      };
     case CARD_EXPIRED_DATE:
       return {
         ...state,
         creditCard: {
           ...state.creditCard,
-          expiredDate: payload
-        }}
+          expiredDate: payload,
+        },
+      };
     case CARD_TYPE:
       return {
         ...state,
         creditCard: {
           ...state.creditCard,
-          cardType: payload
-        }}
+          cardType: payload,
+        },
+      };
     case RESET_CREDIT_CARD:
       return {
         ...state,
@@ -108,14 +115,14 @@ export function appReducer(state: InitialState, action: {type: string, payload?:
           cardNumber: '',
           nameOnCard: '',
           expiredDate: '',
-          cardType: "",
-        }
-      }
+          cardType: '',
+        },
+      };
     case ADD_USER:
       return {
         ...state,
-        userInfo: payload
-      }
+        userInfo: payload,
+      };
     default:
       return state;
   }
@@ -127,11 +134,14 @@ export function appReducer(state: InitialState, action: {type: string, payload?:
  * @return {function}
  */
 export const actions: ActionsType = (dispatch: Dispatch<any>) => ({
-  selectedPlan: (selectedPlan: SelectedPlanType) => dispatch({ type: SELECTED_PLAN, payload: selectedPlan }),
-  resetCreditCard: () => dispatch({type: RESET_CREDIT_CARD}),
-  cardNumber: (card: string) => dispatch({type: CARD_NUMBER, payload: card }),
-  nameOnCard: (name: string) => dispatch({type: NAME_ON_CARD, payload: name }),
-  expiredDate: (date: string) => dispatch({type: CARD_EXPIRED_DATE, payload: date }),
-  cardType: (type: string) => dispatch({type: CARD_TYPE, payload: type }),
-  addUserInfo: (userInfo: UserInfoType) => dispatch({type: ADD_USER, payload: userInfo})
+  selectedPlan: (selectedPlan: SelectedPlanType) =>
+    dispatch({ type: SELECTED_PLAN, payload: selectedPlan }),
+  resetCreditCard: () => dispatch({ type: RESET_CREDIT_CARD }),
+  cardNumber: (card: string) => dispatch({ type: CARD_NUMBER, payload: card }),
+  nameOnCard: (name: string) => dispatch({ type: NAME_ON_CARD, payload: name }),
+  expiredDate: (date: string) =>
+    dispatch({ type: CARD_EXPIRED_DATE, payload: date }),
+  cardType: (type: string) => dispatch({ type: CARD_TYPE, payload: type }),
+  addUserInfo: (userInfo: UserInfoType) =>
+    dispatch({ type: ADD_USER, payload: userInfo }),
 });

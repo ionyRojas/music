@@ -1,20 +1,19 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { useEffect, useReducer } from 'react';
-import { ChakraProvider } from "@chakra-ui/react"
+import { ChakraProvider } from '@chakra-ui/react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   withRouter,
-  RouteComponentProps
-} from "react-router-dom";
+  RouteComponentProps,
+} from 'react-router-dom';
 
-
-import Success from 'components/Success'
-import Home from 'components/Home'
-import Plans from 'components/Plans'
-import PaymentFlow from 'components/PaymentFlow'
+import Success from 'components/Success';
+import Home from 'components/Home';
+import Plans from 'components/Plans';
+import PaymentFlow from 'components/PaymentFlow';
 import Navigation from 'components/Navigation';
 import AppContext from 'context/appContext';
 import { initialState, appReducer, actions } from 'store';
@@ -27,10 +26,10 @@ function ScrollToTop({ history }: RouteComponentProps) {
     });
     return () => {
       unlisten();
-    }
+    };
   }, [history]);
 
-  return (null);
+  return null;
 }
 
 const WithRouterScroll = withRouter(ScrollToTop);
@@ -46,16 +45,16 @@ function App() {
       }}
     >
       <ChakraProvider>
-          <Router>
-            <Navigation />
-            <main css={styles.main}>
+        <Router>
+          <Navigation />
+          <main css={styles.main}>
             <WithRouterScroll />
             <Switch>
               <Route exact path="/">
                 <Home />
               </Route>
               <Route path="/plans">
-                <Plans/>
+                <Plans />
               </Route>
               <Route path="/payment-process">
                 <PaymentFlow />
@@ -64,8 +63,8 @@ function App() {
                 <Success />
               </Route>
             </Switch>
-            </main>
-          </Router>
+          </main>
+        </Router>
       </ChakraProvider>
     </AppContext.Provider>
   );

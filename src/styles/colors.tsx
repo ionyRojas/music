@@ -5,4 +5,4 @@ enum Colors {
   Black = '#000',
 }
 
-export default Colors
+export default Colors;
